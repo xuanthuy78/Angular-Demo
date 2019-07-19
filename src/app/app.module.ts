@@ -11,6 +11,7 @@ import { UpdateUserComponent } from './users/update-user/update-user.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { UserService } from 'src/shared/services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     AlertModule.forRoot(),
     ModalModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
