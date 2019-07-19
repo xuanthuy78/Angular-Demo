@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalDirective } from 'ngx-bootstrap';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { ModalDirective, BsModalRef,BsModalService } from 'ngx-bootstrap';
 import { User } from 'src/shared/dto/user';
 import { UserService } from 'src/shared/services/user.service';
 
@@ -12,8 +12,12 @@ export class UsersComponent implements OnInit {
   @ViewChild('createUserModal', { static: false }) createUserModal: ModalDirective;
   @ViewChild('updateUserModal', { static: false }) updateUserModal: ModalDirective;
   
+  modalRef: BsModalRef;
   users: User[];
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private modalService: BsModalService
+  ) { }
 
   ngOnInit() {
     this.getUser();
@@ -35,4 +39,20 @@ export class UsersComponent implements OnInit {
   loadUserByPage(): void {
     this.getUser();
   }
+
+  openModalDelete(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }  
+
+  deleteUser(id): void {
+    this.userService.deleteUser(id).subscribe(data => {
+      this.getUser()
+    });
+    this.modalRef.hide();
+  }
+ 
+  decline(): void {
+    this.modalRef.hide();
+  }
+
 }
