@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ModalDirective, BsModalRef,BsModalService } from 'ngx-bootstrap';
 import { User } from 'src/shared/dto/user';
 import { UserService } from 'src/shared/services/user.service';
+import { UpdateUserComponent } from './update-user/update-user.component';
 
 @Component({
   selector: 'app-users',
@@ -10,7 +11,7 @@ import { UserService } from 'src/shared/services/user.service';
 })
 export class UsersComponent implements OnInit {
   @ViewChild('createUserModal', { static: false }) createUserModal: ModalDirective;
-  @ViewChild('updateUserModal', { static: false }) updateUserModal: ModalDirective;
+  @ViewChild(UpdateUserComponent, {static: false}) editUser : UpdateUserComponent;
   
   modalRef: BsModalRef;
   users: User[];
@@ -32,8 +33,8 @@ export class UsersComponent implements OnInit {
     this.createUserModal.show();
   }
   
-  updateUser(): void {
-    this.updateUserModal.show();
+  updateUser(user): void {
+    this.editUser.show(user);
   }
 
   loadUserByPage(): void {

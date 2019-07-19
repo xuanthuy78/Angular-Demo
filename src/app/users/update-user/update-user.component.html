@@ -2,7 +2,7 @@
   aria-labelledby="dialog-child-name">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form>
+      <form *ngIf="active" #updateUserForm="ngForm" id="frm_create_user" novalidate (ngSubmit)="save()">
         <div class="modal-header">
           <h4 id="dialog-child-name" class="modal-title pull-left">Update User</h4>
           <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
@@ -11,27 +11,56 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
+            <label for="id">ID User</label>
+            <input id="id" type="text" name="id" [(ngModel)]="user.id" class="validate form-control" ngModel
+              #id="ngModel" disabled>
+          </div>
+          <div class="form-group">
             <label for="first_name">First Name:</label>
-            <input id="first_name" type="text" name="first_name" class="validate form-control">
+            <input id="first_name" type="text" name="first_name" [(ngModel)]="user.first_name"
+              class="validate form-control" ngModel #first_name="ngModel" required>
+            <div *ngIf="updateUserForm.submitted && first_name.invalid">
+              <div *ngIf="first_name.errors.required" class="text-danger">first_name is required</div>
+            </div>
           </div>
           <div class="form-group">
             <label for="last_name">Last name:</label>
-            <input type="text" class="form-control" name="last_name" id="last_name">
+            <input type="text" class="form-control" name="last_name" [(ngModel)]="user.last_name" id="last_name" ngModel
+              #last_name="ngModel" required>
+            <div *ngIf="updateUserForm.submitted && last_name.invalid">
+              <div *ngIf="last_name.errors.required" class="text-danger">last_name is required</div>
+            </div>
           </div>
           <div class="form-group">
             <label for="email">Email:</label>
-            <input type="text" class="form-control" name="email" id="email">
+            <input type="text" class="form-control" name="email" [(ngModel)]="user.email" id="email" ngModel
+              #email="ngModel" required>
+            <div *ngIf="updateUserForm.submitted && email.invalid">
+              <div *ngIf="email.errors.required" class="text-danger">email is required</div>
+            </div>
           </div>
           <div class="form-group">
             <label for="gender">Gender:</label>
-            <input type="text" class="form-control" name="gender" id="gender">
+            <input type="text" class="form-control" name="gender" [(ngModel)]="user.gender" id="gender" ngModel
+              #gender="ngModel" required>
+            <div *ngIf="updateUserForm.submitted && gender.invalid">
+              <div *ngIf="gender.errors.required" class="text-danger">last_name is required</div>
+            </div>
           </div>
           <div class="form-group">
             <label for="address">Address:</label>
-            <input type="text" class="form-control" name="address" id="address">
+            <input type="text" class="form-control" name="address" [(ngModel)]="user.address" id="address" ngModel
+              #address="ngModel" required>
+            <div *ngIf="updateUserForm.submitted && address.invalid">
+              <div *ngIf="address.errors.address" class="text-danger">address is required</div>
+            </div>
           </div>
           <div class="modal-footer">
-            <button title="Save" type="submit" data-dismiss="modal" class="btn btn-primary waves-effect">
+            <button [disabled]="saving" title="Cancel" type="button" class="btn btn-default waves-effect"
+              (click)="close()">
+              Cancel
+            </button>
+            <button [disabled]="saving" title="Save" type="submit" class="btn btn-primary waves-effect">
               Save
             </button>
           </div>
