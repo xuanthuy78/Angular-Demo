@@ -17,6 +17,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.getUser();
+    this.loadUserByPage();
   }
 
   getUser(): void {
@@ -29,5 +30,9 @@ export class UsersComponent implements OnInit {
   
   updateUser(): void {
     this.updateUserModal.show();
+  }
+
+  loadUserByPage(): void {
+    this.getUser();
   }
 }

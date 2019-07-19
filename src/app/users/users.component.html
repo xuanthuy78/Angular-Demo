@@ -46,5 +46,5 @@
   </table>
 </div>
 
-<app-create-user #createUserModal></app-create-user>
+<app-create-user #createUserModal (modalSave)="loadUserByPage()"></app-create-user>
 <app-update-user #updateUserModal></app-update-user>
