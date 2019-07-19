@@ -11,9 +11,6 @@
       <li class="nav-item">
         <a class="nav-link" (click)="createUser()">Create User</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="updateUser()">Edit User</a>
-      </li>
     </ul>
   </div> 
 </nav>
@@ -30,7 +27,7 @@
         <th>Email</th>
         <th>Gender</th>
         <th>Address</th>
-        <th>Delete</th>
+        <th colspan="2">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -41,6 +38,7 @@
         <td>{{ user.gender }}</td>
         <td>{{ user.address }}</td>
         <td><a name="" id="" class="btn btn-danger" (click)="openModalDelete(template)" role="button"><i class="fa fa-trash"></i></a></td>
+        <td><a name="" id="" class="btn btn-primary" (click)="updateUser(user)" role="button"><i class="fa fa-edit"></i></a></td>
         <ng-template #template>
             <div class="modal-body text-center">
               <p>Do you want to delete?</p>
@@ -55,4 +53,4 @@
 </div>
 
 <app-create-user #createUserModal (modalSave)="loadUserByPage()"></app-create-user>
-<app-update-user #updateUserModal></app-update-user>
+<app-update-user #updateUserModal (modalSave)="loadUserByPage()"></app-update-user>

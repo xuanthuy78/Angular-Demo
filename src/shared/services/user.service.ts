@@ -25,4 +25,9 @@ export class UserService {
     return this._https.delete<User>(this.apiUrl + '/' + id)
     .pipe()
   }
+
+  updateUser(id, user): Observable<User> {
+    return this._https.put<User>(this.apiUrl + '/' + id, user)
+    .pipe()
+  }
 }
