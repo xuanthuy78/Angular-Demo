@@ -40,10 +40,18 @@
         <td>{{ user.email }}</td>
         <td>{{ user.gender }}</td>
         <td>{{ user.address }}</td>
-        <td><a name="" id="" class="btn btn-danger" href="#" role="button"><i class="fa fa-trash"></i></a></td>
+        <td><a name="" id="" class="btn btn-danger" (click)="openModalDelete(template)" role="button"><i class="fa fa-trash"></i></a></td>
+        <ng-template #template>
+            <div class="modal-body text-center">
+              <p>Do you want to delete?</p>
+              <button type="button" class="btn btn-default" (click)="deleteUser(user.id)" >Yes</button>
+              <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+            </div>
+          </ng-template>
       </tr>
     </tbody>
   </table>
+  
 </div>
 
 <app-create-user #createUserModal (modalSave)="loadUserByPage()"></app-create-user>

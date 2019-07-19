@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../dto/user';
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,10 @@ export class UserService {
   createUser(user): Observable<User> {
     return this._https.post<User>(this.apiUrl, user)
     .pipe()
-  }  
+  }
+  
+  deleteUser(id){
+    return this._https.delete<User>(this.apiUrl + '/' + id)
+    .pipe()
+  }
 }
