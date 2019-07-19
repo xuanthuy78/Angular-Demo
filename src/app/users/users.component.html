@@ -34,12 +34,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-        <td>Female</td>
-        <td>314 Anhalt Junction</td>
+      <tr *ngFor='let user of users; let i = index'>
+        <td>{{ user.first_name }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.gender }}</td>
+        <td>{{ user.address }}</td>
         <td><a name="" id="" class="btn btn-danger" href="#" role="button"><i class="fa fa-trash"></i></a></td>
       </tr>
     </tbody>
