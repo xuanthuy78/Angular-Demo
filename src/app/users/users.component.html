@@ -49,7 +49,11 @@
       </tr>
     </tbody>
   </table>
-  
+  <div class="row">
+    <div class="col-xs-12 col-12">
+      <pagination [totalItems]="1" [(ngModel)]="currentPage"></pagination>
+    </div>
+  </div>
 </div>
 
 <app-create-user #createUserModal (modalSave)="loadUserByPage()"></app-create-user>
