@@ -3,21 +3,40 @@
     <div class="col-xs-12	col-sm-12	col-md-12	col-lg-12">
       <div class="box">
         <h1>Login</h1>
-        <form autoComplete="off" action="" method="post">
+        <form #loginUserForm="ngForm" id="frm_create_user" novalidate (ngSubmit)="save()">
           <div class="inputBox">
-            <input type="text" class="Username" autoComplete="off" required />
+            <input type="text" class="Username" autoComplete="off" name="name" [(ngModel)]="user.name" ngModel
+              #name="ngModel" required minlength="2" maxlength="32" />
             <label class="label">Username</label>
+            <div *ngIf="loginUserForm.submitted && name.invalid" class="text-danger">
+              <div *ngIf="name.errors.required">Name is required</div>
+              <div *ngIf="name.errors.minlength">Password must be at least 2 characters</div>
+              <div *ngIf="name.errors.maxlength">Password doesn't enter exceed 32 characters</div>
+            </div>
           </div>
           <div class="inputBox">
-            <input type="password" class="password" autoComplete="off" required />
+            <input type="password" class="password" autoComplete="off" name="password" [(ngModel)]="user.password"
+              ngModel #password="ngModel" required minlength="6" maxlength="32" />
             <label class="label">Password</label>
+            <div *ngIf="loginUserForm.submitted && password.invalid" class="text-danger">
+              <div *ngIf="password.errors.required">Password is required</div>
+              <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+              <div *ngIf="password.errors.maxlength">Password doesn't enter exceed 32 characters</div>
+            </div>
           </div>
           <div class="text-center">
-            <button type="submit" class="btn btn-primary btn-lg">
-              Login
+            <button [disabled]="saving" title="Save" type="submit" class="btn btn-primary waves-effect">
+              Save
             </button>
           </div>
         </form>
       </div>
     </div>
+  </div>
 </div>
+<div *ngIf="show">
+  <div *ngFor="let alert of alerts">
+    <alert [type]="alert.type" [dismissible]="dismissible" (onClosed)="onClosed(alert)">{{ alert.msg }}</alert>
+  </div>
+</div>
+

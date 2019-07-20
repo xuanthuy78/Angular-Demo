@@ -15,6 +15,7 @@ export class UsersComponent implements OnInit {
   
   modalRef: BsModalRef;
   users: User[];
+  totalItems = 0;
   constructor(
     private userService: UserService,
     private modalService: BsModalService
@@ -38,7 +39,11 @@ export class UsersComponent implements OnInit {
   }
 
   loadUserByPage(): void {
-    this.getUser();
+    this.userService.getUsers().subscribe(
+      data => {
+        this.users = data;
+        this.totalItems = data.length
+      });
   }
 
   openModalDelete(template: TemplateRef<any>) {
